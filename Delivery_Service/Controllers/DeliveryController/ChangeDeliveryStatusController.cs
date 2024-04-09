@@ -1,6 +1,5 @@
-﻿using DeliveryService.Application.Dto;
-using DeliveryService.Application.Interface;
-using DeliveryService.Domain;
+﻿using DeliveryService.Application.Interface;
+using Delivery_Service.Domain;
 using DeliveryService.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,30 +18,31 @@ namespace DeliveryService.Controllers.DeliveryController
 
         [HttpPut("ChangeAvailabilityStatus/{DeliveryId}")]
         public async Task<IActionResult> ChangeDeliveryStatus(string DeliveryId)
-    {
-
-        try
         {
-            Delivery Delivery = await _unitOfWork.GetRepository<Delivery>().GetById(DeliveryId);
 
-            if (Delivery != null)
+            try
             {
-                
-                Delivery.AvailabilityStatus=!Delivery.AvailabilityStatus;
-                 _unitOfWork.GetRepository<Delivery>().Update(Delivery);
-                await _unitOfWork.SaveChangesAsync();
-                
-                return NoContent();
-            }
-            else
-            {
+                Driver Delivery = await _unitOfWork.GetRepository<Driver>().GetById(DeliveryId);
+
+                //if (Delivery != null)
+                //{
+
+                //    Delivery.AvailabilityStatus = !Delivery.AvailabilityStatus;
+                //    _unitOfWork.GetRepository<Driver>().Update(Delivery);
+                //    await _unitOfWork.SaveChangesAsync();
+
+                //    return NoContent();
+                //}
+                //else
+                //{
+                //    return NotFound();
+                //}
                 return NotFound();
             }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
         }
-        catch (Exception ex)
-        {
-            return BadRequest(new { ex.Message });
-        }
-    }
     }
 }

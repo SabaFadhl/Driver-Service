@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DeliveryService.Application.Dto
+namespace Delivery_Service.Application.Dto.Driver
 {
-    public class AddDeliveryDto
-    {         
+    public class AddDriverDto
+    {
         private string _name;
         private string _email;
         private string _password;
-        private string _phoneNumber;
-       
+        private string _phoneNumber;     
+
         public string Name { get => _name; set => _name = value; }
 
         [EmailAddress(ErrorMessage = "Invalid Email Address")]

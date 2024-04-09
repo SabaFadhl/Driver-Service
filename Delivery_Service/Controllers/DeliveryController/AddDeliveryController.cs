@@ -1,6 +1,7 @@
-﻿using DeliveryService.Application.Dto;
+﻿using Delivery_Service.Application.Dto.Common;
+using Delivery_Service.Application.Dto.Driver;
+using Delivery_Service.Domain;
 using DeliveryService.Application.Interface;
-using DeliveryService.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryService.Controllers.DeliveryController
@@ -17,7 +18,7 @@ namespace DeliveryService.Controllers.DeliveryController
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddDeliveryDto addDeliveryDto)
+        public async Task<IActionResult> Add(AddDriverDto addDeliveryDto)
         {
             #region Validation Fields
             if (addDeliveryDto == null)
@@ -44,12 +45,12 @@ namespace DeliveryService.Controllers.DeliveryController
 
             try
             {
-                if ((await _unitOfWork.GetRepository<Delivery>().SingleOrDefaultAsync(c => c.Name == addDeliveryDto.Name || c.Email == addDeliveryDto.Email)) != null)
+                if ((await _unitOfWork.GetRepository<Driver>().SingleOrDefaultAsync(c => c.Name == addDeliveryDto.Name || c.Email == addDeliveryDto.Email)) != null)
                 {
                     return BadRequest(new { errorMessage = "This Delivery already exists with the same name or email." });
                 }
 
-                Delivery Delivery = new Delivery
+                Driver Delivery = new Driver
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = addDeliveryDto.Name,
@@ -58,7 +59,7 @@ namespace DeliveryService.Controllers.DeliveryController
                     PhoneNumber = addDeliveryDto.PhoneNumber
                 };
 
-                _unitOfWork.GetRepository<Delivery>().Add(Delivery);
+                _unitOfWork.GetRepository<Driver>().Add(Delivery);
 
                 await _unitOfWork.SaveChangesAsync();
 
