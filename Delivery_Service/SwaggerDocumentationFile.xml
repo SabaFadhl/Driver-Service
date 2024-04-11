@@ -16,6 +16,13 @@
             <param name="driverId">Driver identity</param>
             <returns></returns>
         </member>
+        <member name="M:Delivery_Service.Controllers.DriverController.GetDriverController.Get(System.String)">
+            <summary>
+            This API to allow system admin to view Driver by Id
+            </summary>
+            <param name="driverId">Driver identity</param>
+            <returns></returns>
+        </member>
         <member name="T:Delivery_Service.Migrations.InitialCreate">
             <inheritdoc />
         </member>
