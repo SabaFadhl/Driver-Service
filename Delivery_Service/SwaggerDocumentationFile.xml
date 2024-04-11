@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Delivery_Service</name>
+    </assembly>
+    <members>
+        <member name="P:Delivery_Service.Application.Dto.Driver.SetDriverAvailabilityStatusDto.Status">
+            <summary>
+            The Status should be: 'offline' or 'online'
+            </summary>
+        </member>
+        <member name="T:Delivery_Service.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:Delivery_Service.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Delivery_Service.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Delivery_Service.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:DeliveryService.Controllers.DeliveryController.ChangeAvailabilityStatusController.ChangeDeliveryStatus(System.String,Delivery_Service.Application.Dto.Driver.SetDriverAvailabilityStatusDto)">
+            <summary>
+            This API for Changing the driver availablility status
+            </summary>
+            <param name="DriverId">The Driver Identiry (Should be GUID/UUID)</param>
+            <param name="setDriverAvailabilityStatusDto">The Status should be: 'offline' or 'online'</param>      
+            <returns>NoContent (204)</returns>
+        </member>
+    </members>
+</doc>
