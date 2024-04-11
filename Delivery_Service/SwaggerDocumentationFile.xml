@@ -21,6 +21,13 @@
         <member name="M:Delivery_Service.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="M:DeliveryService.Controllers.DeliveryController.AddDriverController.Add(Delivery_Service.Application.Dto.Driver.AddDriverDto)">
+            <summary>
+            To add new Driver.
+            </summary>
+            <param name="addDeliveryDto">Driver Information.</param>
+            <returns></returns>
+        </member>
         <member name="M:DeliveryService.Controllers.DeliveryController.ChangeAvailabilityStatusController.ChangeDeliveryStatus(System.String,Delivery_Service.Application.Dto.Driver.SetDriverAvailabilityStatusDto)">
             <summary>
             This API for Changing the driver availablility status
@@ -28,6 +35,13 @@
             <param name="DriverId">The Driver Identiry (Should be GUID/UUID)</param>
             <param name="setDriverAvailabilityStatusDto">The Status should be: 'offline' or 'online'</param>      
             <returns>NoContent (204)</returns>
+        </member>
+        <member name="M:CustomerService.Controllers.CustomerController.DriverLoginController.Login(Delivery_Service.Application.Dto.Driver.DriverLoginDto)">
+            <summary>
+            This API to allow Driver to Login.
+            </summary>
+            <param name="loginDriverDto">Driver login credentials.</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

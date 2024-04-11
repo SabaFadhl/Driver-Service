@@ -8,22 +8,28 @@ using System.Text.RegularExpressions;
 namespace DeliveryService.Controllers.DeliveryController
 {
     [ApiController]
-    [Route("api/Delivery")]
-    public class AddDeliveryController : ControllerBase
+    [Route("api/Driver")]
+    public class AddDriverController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddDeliveryController(IUnitOfWork unitOfWork)
+        public AddDriverController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// To add new Driver.
+        /// </summary>
+        /// <param name="addDeliveryDto">Driver Information.</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add(AddDriverDto addDeliveryDto)
         {
-            #region Validation Fields
+            
+            #region Validation Fields            
             if (addDeliveryDto == null)
-            {
+            {                
                 return BadRequest(new { errorMessage = "The Driver is null." });
             }
             if (string.IsNullOrWhiteSpace(addDeliveryDto.Name))
