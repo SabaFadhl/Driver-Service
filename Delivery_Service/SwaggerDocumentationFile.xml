@@ -23,6 +23,22 @@
             <param name="driverId">Driver identity</param>
             <returns></returns>
         </member>
+        <member name="M:Delivery_Service.Controllers.DriverController.GetDriverListController.GetList(System.Int32,System.Int32)">
+            <summary>
+            This API to allow system admin to view all available Drivers
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Delivery_Service.Controllers.DriverController.UpdateDriverController.Update(System.String,Delivery_Service.Application.Dto.Driver.UpdateDriverDto)">
+            <summary>
+            To allow Driver or system admin to Update Driver information.
+            </summary>
+            <param name="driverId">Driver identity</param>
+            <param name="updateDriverDto">Driver information.</param>
+            <returns></returns>
+        </member>
         <member name="T:Delivery_Service.Migrations.InitialCreate">
             <inheritdoc />
         </member>

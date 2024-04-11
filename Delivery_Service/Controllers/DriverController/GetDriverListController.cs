@@ -17,6 +17,12 @@ namespace Delivery_Service.Controllers.DriverController
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// This API to allow system admin to view all available Drivers
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetList([FromQuery] int pageIndex, int pageSize)
         {
