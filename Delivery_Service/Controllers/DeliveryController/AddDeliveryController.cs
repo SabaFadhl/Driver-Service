@@ -3,6 +3,7 @@ using Delivery_Service.Application.Dto.Driver;
 using Delivery_Service.Domain;
 using DeliveryService.Application.Interface;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace DeliveryService.Controllers.DeliveryController
 {
@@ -23,23 +24,30 @@ namespace DeliveryService.Controllers.DeliveryController
             #region Validation Fields
             if (addDeliveryDto == null)
             {
-                return BadRequest(new { errorMessage = "The Delivery is null." });
+                return BadRequest(new { errorMessage = "The Driver is null." });
             }
             if (string.IsNullOrWhiteSpace(addDeliveryDto.Name))
             {
-                return BadRequest(new { errorMessage = "You must enter Name of the Delivery." });
+                return BadRequest(new { errorMessage = "You must enter Name of the Driver." });
             }
             if (string.IsNullOrWhiteSpace(addDeliveryDto.Email))
             {
-                return BadRequest(new { errorMessage = "You must enter Email of the Delivery." });
+                return BadRequest(new { errorMessage = "You must enter Email of the Driver." });
             }
             if (string.IsNullOrWhiteSpace(addDeliveryDto.PhoneNumber))
             {
-                return BadRequest(new { errorMessage = "You must enter PhoneNumber of the Delivery." });
+                return BadRequest(new { errorMessage = "You must enter PhoneNumber of the Driver." });
+            }
+            else
+            {
+                if (!Regex.IsMatch(addDeliveryDto.PhoneNumber, @"^\+967\s\d{9}$"))
+                {
+                    return BadRequest(new { errorMessage = "Invalid PhoneNumber, The PhoneNumber must be like this format: +967 000000000" });
+                }
             }
             if (string.IsNullOrWhiteSpace(addDeliveryDto.Password))
             {
-                return BadRequest(new { errorMessage = "You must enter Password of the Delivery." });
+                return BadRequest(new { errorMessage = "You must enter Password of the Driver." });
             }
             #endregion
 
@@ -47,7 +55,7 @@ namespace DeliveryService.Controllers.DeliveryController
             {
                 if ((await _unitOfWork.GetRepository<Driver>().SingleOrDefaultAsync(c => c.Name == addDeliveryDto.Name || c.Email == addDeliveryDto.Email)) != null)
                 {
-                    return BadRequest(new { errorMessage = "This Delivery already exists with the same name or email." });
+                    return BadRequest(new { errorMessage = "This Driver already exists with the same name or email." });
                 }
 
                 Driver Delivery = new Driver

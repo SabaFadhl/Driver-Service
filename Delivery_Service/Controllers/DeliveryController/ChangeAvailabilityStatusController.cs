@@ -7,11 +7,11 @@ namespace DeliveryService.Controllers.DeliveryController
 {
     [ApiController]
     [Route("api/Delivery")]
-    public class ChangeDeliveryStatusController : ControllerBase
+    public class ChangeAvailabilityStatusController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ChangeDeliveryStatusController(IUnitOfWork unitOfWork)
+        public ChangeAvailabilityStatusController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
