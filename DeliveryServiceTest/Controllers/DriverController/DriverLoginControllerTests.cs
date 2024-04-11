@@ -30,11 +30,6 @@ namespace DeliveryServiceTest.Controllers.DriverController
             var mapperMock = new Mock<IMapper>();
             _mapperMock = mapperMock.Object;
 
-            mapperMock.Setup(m => m.Map<DriverLoginDto, Driver>(It.IsAny<DriverLoginDto>()))
-                .Returns((DriverLoginDto source) => new Driver());
-
-            _mapperMock = mapperMock.Object;
-
             _controller = new DriverLoginController(_serviceMock.Object);
         }
 

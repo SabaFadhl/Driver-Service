@@ -24,7 +24,7 @@ namespace CustomerService.Controllers.CustomerController
         /// <summary>
         /// This API to allow Driver to Login.
         /// </summary>
-        /// <param name="loginDriverDto">Driver login credentials.</param>
+        /// <param name="loginDriverDto">Driver login Credentials.</param>
         /// <returns></returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login(DriverLoginDto loginDriverDto)
