@@ -9,6 +9,13 @@
             The Status should be: 'offline' or 'online'
             </summary>
         </member>
+        <member name="M:Delivery_Service.Controllers.DriverController.DeleteDriverController.Delete(System.String)">
+            <summary>
+            This API to allow system admin or driver to delete the driver user.
+            </summary>
+            <param name="driverId">Driver identity</param>
+            <returns></returns>
+        </member>
         <member name="T:Delivery_Service.Migrations.InitialCreate">
             <inheritdoc />
         </member>
