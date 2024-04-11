@@ -3,6 +3,7 @@ using Delivery_Service.Domain;
 using DeliveryService.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Delivery_Service.Application.Dto.Driver;
+using System.Text.RegularExpressions;
 
 namespace DeliveryService.Controllers.DeliveryController
 {
@@ -27,15 +28,31 @@ namespace DeliveryService.Controllers.DeliveryController
         [HttpPut("ChangeAvailabilityStatus/{DriverId}")]
         public async Task<IActionResult> ChangeDeliveryStatus(string DriverId, SetDriverAvailabilityStatusDto setDriverAvailabilityStatusDto)
         {
-
+            #region Validation Fields
+            if (setDriverAvailabilityStatusDto == null)
+            {
+                return BadRequest(new { errorMessage = "The SetDriverAvailabilityStatusDto is null." });
+            }
+            if (string.IsNullOrWhiteSpace(setDriverAvailabilityStatusDto.Status))
+            {
+                return BadRequest(new { errorMessage = "You must enter Status." });
+            }           
+            else
+            {
+                if (!Regex.IsMatch(setDriverAvailabilityStatusDto.Status, @"^(offline|online)$"))
+                {
+                    return BadRequest(new { errorMessage = "Invalid Status, The Status should be: 'offline' or 'online'" });
+                }
+            }
+             
+            #endregion
             try
             {
                 Driver driver = await _unitOfWork.Driver.GetById(DriverId);
 
                 if (driver != null)
                 {
-
-                   // driver.AvailabilityStatus = !driver.AvailabilityStatus;
+                    driver.AvailabilityStatus = setDriverAvailabilityStatusDto.Status;                 
                     _unitOfWork.Driver.Update(driver);
                     await _unitOfWork.SaveChangesAsync();
 
@@ -43,7 +60,7 @@ namespace DeliveryService.Controllers.DeliveryController
                 }
                 else
                 {
-                    return NotFound();
+                    return NotFound(new { ErrorMessag = "There is no Driver with this Id '" + DriverId + "'" });
                 }
             }
             catch (Exception ex)
