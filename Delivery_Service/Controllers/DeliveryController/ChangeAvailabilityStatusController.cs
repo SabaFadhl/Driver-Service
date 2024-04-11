@@ -22,7 +22,7 @@ namespace DeliveryService.Controllers.DeliveryController
 
             try
             {
-                Driver Delivery = await _unitOfWork.GetRepository<Driver>().GetById(DeliveryId);
+                Driver Delivery = await _unitOfWork.Driver.GetById(DeliveryId);
 
                 //if (Delivery != null)
                 //{

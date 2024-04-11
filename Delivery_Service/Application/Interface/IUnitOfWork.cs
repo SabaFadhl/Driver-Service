@@ -1,8 +1,11 @@
-﻿namespace DeliveryService.Application.Interface
+﻿using Delivery_Service.Domain;
+
+namespace DeliveryService.Application.Interface
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
+        IRepository<Driver> Driver { get; }
+        IRepository<RequestForDelivery> RequestForDelivery { get; }
         Task SaveChangesAsync();
     }
 }

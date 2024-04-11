@@ -1,4 +1,5 @@
-﻿using DeliveryService.Application.Interface;
+﻿using Delivery_Service.Domain;
+using DeliveryService.Application.Interface;
 
 namespace DeliveryService.Infrastructure
 {
@@ -7,16 +8,17 @@ namespace DeliveryService.Infrastructure
         private readonly MasterContext _context;
         private bool _disposed;
 
+        public IRepository<Driver> Driver { get; private set; }
+        public IRepository<RequestForDelivery> RequestForDelivery { get; private set; }
+
         public UnitOfWork(MasterContext context)
         {
             _context = context;
             _disposed = false;
-        }
 
-        public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class
-        {
-            return new Repository<TEntity>(_context);
-        }
+            Driver = new Repository<Driver>(_context);
+            RequestForDelivery = new Repository<RequestForDelivery>(_context);
+        }  
 
         public async Task SaveChangesAsync()
         {

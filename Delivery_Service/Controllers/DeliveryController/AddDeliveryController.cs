@@ -53,7 +53,7 @@ namespace DeliveryService.Controllers.DeliveryController
 
             try
             {
-                if ((await _unitOfWork.GetRepository<Driver>().SingleOrDefaultAsync(c => c.Name == addDeliveryDto.Name || c.Email == addDeliveryDto.Email)) != null)
+                if ((await _unitOfWork.Driver.SingleOrDefaultAsync(c => c.Name == addDeliveryDto.Name || c.Email == addDeliveryDto.Email)) != null)
                 {
                     return BadRequest(new { errorMessage = "This Driver already exists with the same name or email." });
                 }
@@ -67,7 +67,7 @@ namespace DeliveryService.Controllers.DeliveryController
                     PhoneNumber = addDeliveryDto.PhoneNumber
                 };
 
-                _unitOfWork.GetRepository<Driver>().Add(Delivery);
+                _unitOfWork.Driver.Add(Delivery);
 
                 await _unitOfWork.SaveChangesAsync();
 
