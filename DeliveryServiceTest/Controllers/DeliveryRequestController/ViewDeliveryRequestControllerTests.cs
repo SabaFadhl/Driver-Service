@@ -1,6 +1,5 @@
 ﻿using AutoFixture;
-using Delivery_Service.Controllers.DriverController;
-using Delivery_Service.Controllers.RequestForDeliveryController;
+using Delivery_Service.Controllers.DeliveryRequestController;
 using Delivery_Service.Domain;
 using DeliveryService.Application.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeliveryServiceTest.Controllers.RequestForDeliveryController
+namespace DeliveryServiceTest.Controllers.DeliveryRequest
 {
     public class ViewDeliveryRequestControllerTests
     {
@@ -34,7 +33,7 @@ namespace DeliveryServiceTest.Controllers.RequestForDeliveryController
             Driver request = _fixture.Create<Driver>();
             request.Id = driverId;
             _serviceMock.Setup(x => x.Driver.GetById(driverId)).ReturnsAsync(request);
-            List<RequestForDelivery> requestForDeliveries = _fixture.Create<List<RequestForDelivery>>();
+            List<Delivery_Service.Domain.DeliveryRequest> requestForDeliveries = _fixture.Create<List<Delivery_Service.Domain.DeliveryRequest>>();
             _serviceMock.Setup(x => x.RequestForDelivery.FindAsync(x => x.DriverId == driverId && (x.Status.Equals("pending") || x.Status.Equals("pickedup")))).ReturnsAsync(requestForDeliveries);
 
             // Act

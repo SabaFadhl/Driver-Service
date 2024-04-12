@@ -12,7 +12,7 @@ namespace DeliveryService.Infrastructure
         }
 
         public virtual DbSet<Driver> Driver { get; set; }
-        public virtual DbSet<RequestForDelivery> RequestForDelivery { get; set; }
+        public virtual DbSet<DeliveryRequest> RequestForDelivery { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace DeliveryService.Infrastructure
                    .HasColumnType("timestamp without time zone");
             });
 
-            modelBuilder.Entity<RequestForDelivery>(entity =>
+            modelBuilder.Entity<DeliveryRequest>(entity =>
             {
                 //entity.Property(e => e.Id)
                 //    .HasDefaultValueSql("uuid_generate_v4()");

@@ -1,14 +1,14 @@
 ﻿using Delivery_Service.Application.Dto.Common;
+using Delivery_Service.Application.Dto.DeliveryRequest;
 using Delivery_Service.Application.Dto.Driver;
-using Delivery_Service.Application.Dto.RequestForDelivery;
-using Delivery_Service.Domain;
+ using Delivery_Service.Domain;
 using DeliveryService.Application.Interface;
 using DeliveryService.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 
-namespace Delivery_Service.Controllers.RequestForDeliveryController
+namespace Delivery_Service.Controllers.DeliveryRequestController
 {
     [Route("api/PickupOrder")]
     [ApiController]
@@ -51,7 +51,7 @@ namespace Delivery_Service.Controllers.RequestForDeliveryController
 
             try
             {
-                RequestForDelivery requestForDelivery = new RequestForDelivery
+                DeliveryRequest requestForDelivery = new DeliveryRequest
                 {
                     Id = Guid.NewGuid().ToString(),
                     OrderId = addPickupOrderDto.OrderId,

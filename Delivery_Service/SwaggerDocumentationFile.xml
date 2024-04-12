@@ -4,26 +4,48 @@
         <name>Delivery_Service</name>
     </assembly>
     <members>
+        <member name="P:Delivery_Service.Application.Dto.DeliveryRequest.AddPickupOrderDto.OrderId">
+            <summary>
+            The OrderId is the identity of an order that created in OrderService
+            </summary>
+        </member>
+        <member name="P:Delivery_Service.Application.Dto.DeliveryRequest.AddPickupOrderDto.OrderCode">
+            <summary>
+            The OrderCode is the Numer or Code of an order that created in OrderService.
+            </summary>
+        </member>
+        <member name="P:Delivery_Service.Application.Dto.DeliveryRequest.AddPickupOrderDto.CompoundName">
+            <summary>
+            The CompoundName field represents Name or Short description to read it by Driver when view an orders on the list.
+            This field may be restaurant name and some details
+            </summary>
+        </member>
         <member name="P:Delivery_Service.Application.Dto.Driver.SetDriverAvailabilityStatusDto.Status">
             <summary>
             The Status should be: 'offline' or 'online'
             </summary>
         </member>
-        <member name="P:Delivery_Service.Application.Dto.RequestForDelivery.AddPickupOrderDto.OrderId">
+        <member name="M:Delivery_Service.Controllers.DeliveryRequestController.AcceptDeliveryRequestController.AcceptDeliveryRequest(System.String,System.String)">
             <summary>
-            The OrderId is the identity of an order that created in OrderService
+            This API to allow Driver to accept(Picked Up) DeliveryRequest.
             </summary>
+            <param name="driverId">Driver Id</param>
+            <param name="deliveryRequestId">DeliveryRequestId</param>
+            <returns></returns>
         </member>
-        <member name="P:Delivery_Service.Application.Dto.RequestForDelivery.AddPickupOrderDto.OrderCode">
+        <member name="M:Delivery_Service.Controllers.DeliveryRequestController.AddPickupOrderController.Add(Delivery_Service.Application.Dto.DeliveryRequest.AddPickupOrderDto)">
             <summary>
-            The OrderCode is the Numer or Code of an order that created in OrderService.
+            To allow RestaurantService to send the new orders in order to deliver.
             </summary>
+            <param name="addDeliveryDto">Driver Information.</param>
+            <returns></returns>
         </member>
-        <member name="P:Delivery_Service.Application.Dto.RequestForDelivery.AddPickupOrderDto.CompoundName">
+        <member name="M:Delivery_Service.Controllers.DeliveryRequestController.ViewDeliveryRequestController.GetList(System.String)">
             <summary>
-            The CompoundName field represents Name or Short description to read it by Driver when view an orders on the list.
-            This field may be restaurant name and some details
+            This API to allow Driver to view all Delivery Request assigned to him.
             </summary>
+            <param name="driverId">Driver Id</param>        
+            <returns></returns>
         </member>
         <member name="M:Delivery_Service.Controllers.DriverController.DeleteDriverController.Delete(System.String)">
             <summary>
@@ -53,20 +75,6 @@
             </summary>
             <param name="driverId">Driver identity</param>
             <param name="updateDriverDto">Driver information.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Delivery_Service.Controllers.RequestForDeliveryController.AddPickupOrderController.Add(Delivery_Service.Application.Dto.RequestForDelivery.AddPickupOrderDto)">
-            <summary>
-            To allow RestaurantService to send the new orders in order to deliver.
-            </summary>
-            <param name="addDeliveryDto">Driver Information.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Delivery_Service.Controllers.RequestForDeliveryController.ViewDeliveryRequestController.GetList(System.String)">
-            <summary>
-            This API to allow Driver to view all Delivery Request assigned to him.
-            </summary>
-            <param name="driverId">Driver Id</param>        
             <returns></returns>
         </member>
         <member name="T:Delivery_Service.Migrations.InitialCreate">

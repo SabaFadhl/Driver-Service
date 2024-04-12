@@ -1,4 +1,4 @@
-﻿namespace Delivery_Service.Application.Dto.RequestForDelivery
+﻿namespace Delivery_Service.Application.Dto.DeliveryRequest
 {
     public class ViewDeliveryRequestDto
     {

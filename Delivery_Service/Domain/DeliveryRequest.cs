@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Delivery_Service.Domain
 {
     [Table("RequestForDelivery", Schema = "delivery")]
-    public class RequestForDelivery
+    public class DeliveryRequest
     {
         string _id;
         string _orderId;

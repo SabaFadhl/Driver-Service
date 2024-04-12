@@ -1,11 +1,11 @@
-﻿using Delivery_Service.Application.Dto.Driver;
-using Delivery_Service.Application.Dto.RequestForDelivery;
-using Delivery_Service.Domain;
+﻿using Delivery_Service.Application.Dto.DeliveryRequest;
+using Delivery_Service.Application.Dto.Driver;
+ using Delivery_Service.Domain;
 using DeliveryService.Application.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Delivery_Service.Controllers.RequestForDeliveryController
+namespace Delivery_Service.Controllers.DeliveryRequestController
 {
     [Route("api/ViewDeliveryRequest")]
     [ApiController]
@@ -34,10 +34,10 @@ namespace Delivery_Service.Controllers.RequestForDeliveryController
                     return BadRequest(new { errorMessage = "There is no Driver with this Id ('"+ driverId + "')" });
                 }
 
-                List<RequestForDelivery> requestForDeliveries = await _unitOfWork.RequestForDelivery.FindAsync(x => x.DriverId == driverId && (x.Status.Equals("pending") || x.Status.Equals("pickedup")));
+                List<DeliveryRequest> requestForDeliveries = await _unitOfWork.RequestForDelivery.FindAsync(x => x.DriverId == driverId && (x.Status.Equals("pending") || x.Status.Equals("pickedup")));
 
                 List<ViewDeliveryRequestDto> viewDeliveryRequestDtos = new();
-                foreach (RequestForDelivery item in requestForDeliveries)
+                foreach (DeliveryRequest item in requestForDeliveries)
                 {
                     viewDeliveryRequestDtos.Add(new ViewDeliveryRequestDto
                     {

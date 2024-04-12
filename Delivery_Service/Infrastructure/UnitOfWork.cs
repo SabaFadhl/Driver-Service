@@ -9,7 +9,7 @@ namespace DeliveryService.Infrastructure
         private bool _disposed;
 
         public IRepository<Driver> Driver { get; private set; }
-        public IRepository<RequestForDelivery> RequestForDelivery { get; private set; }
+        public IRepository<DeliveryRequest> RequestForDelivery { get; private set; }
 
         public UnitOfWork(MasterContext context)
         {
@@ -17,7 +17,7 @@ namespace DeliveryService.Infrastructure
             _disposed = false;
 
             Driver = new Repository<Driver>(_context);
-            RequestForDelivery = new Repository<RequestForDelivery>(_context);
+            RequestForDelivery = new Repository<DeliveryRequest>(_context);
         }
 
         public async Task SaveChangesAsync()
@@ -49,7 +49,7 @@ namespace DeliveryService.Infrastructure
             // By default, Now we can choice the available online and not busy Driver.
             // This code for one order for driver.
 
-            RequestForDelivery requestForDelivery = await RequestForDelivery.GetById(PickupOrderId);
+            DeliveryRequest requestForDelivery = await RequestForDelivery.GetById(PickupOrderId);
             if (requestForDelivery != null)
             {
                 Driver driver = await Driver.SingleOrDefaultAsync(x => x.IsBusy == false && x.AvailabilityStatus == "online");
