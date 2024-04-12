@@ -27,7 +27,7 @@ namespace Delivery_Service.Controllers.DriverController
         public async Task<IActionResult> GetList([FromQuery] int pageIndex, int pageSize)
         {
             try
-            {
+            {                 
                 List<Driver> drivers = await _unitOfWork.Driver.GetAllPageing(pageIndex, pageSize);
 
                 List<ViewDriverDto> viewDriverDtos = new();

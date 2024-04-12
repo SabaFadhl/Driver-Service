@@ -62,6 +62,13 @@
             <param name="addDeliveryDto">Driver Information.</param>
             <returns></returns>
         </member>
+        <member name="M:Delivery_Service.Controllers.RequestForDeliveryController.ViewDeliveryRequestController.GetList(System.String)">
+            <summary>
+            This API to allow Driver to view all Delivery Request assigned to him.
+            </summary>
+            <param name="driverId">Driver Id</param>        
+            <returns></returns>
+        </member>
         <member name="T:Delivery_Service.Migrations.InitialCreate">
             <inheritdoc />
         </member>

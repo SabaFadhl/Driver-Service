@@ -46,7 +46,7 @@ namespace DeliveryService.Infrastructure
                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                 entity.Property(e => e.Status)
-                 .HasDefaultValueSql("'pickedup'");
+                 .HasDefaultValueSql("'pending'");
 
                 entity.Property(e => e.OnwayTime)
                  .HasColumnType("timestamp without time zone");
