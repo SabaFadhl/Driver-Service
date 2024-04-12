@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 namespace DeliveryService.Controllers.DeliveryController
 {
     [ApiController]
-    [Route("api/Delivery")]
+    [Route("api/Driver")]
     public class ChangeAvailabilityStatusController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
