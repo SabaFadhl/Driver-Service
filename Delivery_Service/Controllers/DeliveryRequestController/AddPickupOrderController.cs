@@ -63,7 +63,7 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
 
                 await _unitOfWork.SaveChangesAsync();
 
-                _unitOfWork.AssignDriverForOrder(requestForDelivery.Id);
+                _unitOfWork.AssignOrderToDriver(requestForDelivery.Id);
 
                 return StatusCode(201, new ReturnGuidDto { Id = requestForDelivery.Id });
             }

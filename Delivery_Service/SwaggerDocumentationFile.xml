@@ -20,24 +20,29 @@
             This field may be restaurant name and some details
             </summary>
         </member>
+        <member name="P:Delivery_Service.Application.Dto.DeliveryRequest.ChangeOrderStatusDto.Status">
+            <summary>
+            The Status should be: 'pickedup' or 'onway' or 'delivered'
+            </summary>
+        </member>
         <member name="P:Delivery_Service.Application.Dto.Driver.SetDriverAvailabilityStatusDto.Status">
             <summary>
             The Status should be: 'offline' or 'online'
             </summary>
-        </member>
-        <member name="M:Delivery_Service.Controllers.DeliveryRequestController.AcceptDeliveryRequestController.AcceptDeliveryRequest(System.String,System.String)">
-            <summary>
-            This API to allow Driver to accept(Picked Up) DeliveryRequest.
-            </summary>
-            <param name="driverId">Driver Id</param>
-            <param name="deliveryRequestId">DeliveryRequestId</param>
-            <returns></returns>
         </member>
         <member name="M:Delivery_Service.Controllers.DeliveryRequestController.AddPickupOrderController.Add(Delivery_Service.Application.Dto.DeliveryRequest.AddPickupOrderDto)">
             <summary>
             To allow RestaurantService to send the new orders in order to deliver.
             </summary>
             <param name="addDeliveryDto">Driver Information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Delivery_Service.Controllers.DeliveryRequestController.ChangeDeliveryRequestStatusController.ChangeDeliveryRequestStatus(System.String,System.String,Delivery_Service.Application.Dto.DeliveryRequest.ChangeOrderStatusDto)">
+            <summary>
+            This API to allow Driver to accept(Picked Up) DeliveryRequest.
+            </summary>
+            <param name="driverId">Driver Id</param>
+            <param name="deliveryRequestId">DeliveryRequestId</param>
             <returns></returns>
         </member>
         <member name="M:Delivery_Service.Controllers.DeliveryRequestController.ViewDeliveryRequestController.GetList(System.String)">

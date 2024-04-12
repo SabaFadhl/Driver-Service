@@ -8,6 +8,8 @@ namespace DeliveryService.Application.Interface
         IRepository<DeliveryRequest> RequestForDelivery { get; }
         Task SaveChangesAsync();
 
-        void AssignDriverForOrder(string PickupOrderId);
+        void AssignOrderToDriver(string PickupOrderId);
+        
+        void ChangeOrderStatus(string orderId, string status);
     }
 }

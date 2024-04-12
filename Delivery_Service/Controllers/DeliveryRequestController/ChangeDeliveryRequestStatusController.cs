@@ -4,17 +4,18 @@ using Delivery_Service.Domain;
 using DeliveryService.Application.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.Text.RegularExpressions;
 
 namespace Delivery_Service.Controllers.DeliveryRequestController
 {
     [Route("api/AcceptDeliveryRequest")]
     [ApiController]
-    public class AcceptDeliveryRequestController : ControllerBase
+    public class ChangeDeliveryRequestStatusController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AcceptDeliveryRequestController(IUnitOfWork unitOfWork)
+        public ChangeDeliveryRequestStatusController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -27,7 +28,7 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
         /// <returns></returns>
 
         [HttpPut("{driverId}/{deliveryRequestId}")]
-        public async Task<IActionResult> AcceptDeliveryRequest(string driverId, string deliveryRequestId)
+        public async Task<IActionResult> ChangeDeliveryRequestStatus(string driverId, string deliveryRequestId, [FromBody] ChangeOrderStatusDto changeOrderStatusDto)
         {
             #region Validation Fields
             if (string.IsNullOrWhiteSpace(driverId))
@@ -37,6 +38,20 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
             if (string.IsNullOrWhiteSpace(deliveryRequestId))
             {
                 return BadRequest(new { errorMessage = "The deliveryRequestId is null." });
+            }
+            if (changeOrderStatusDto == null)
+            {
+                return BadRequest(new { errorMessage = "The ChangeOrderStatusDto is null." });
+            }
+            else
+            {
+                string pattern = @"(pickedup|onway|delivered)";
+                Match match = Regex.Match(changeOrderStatusDto.Status, pattern, RegexOptions.IgnoreCase);
+
+                if (!match.Success)
+                {
+                    return BadRequest(new { errorMessage = "The status must be one of (pickedup, onway, delivered)." });
+                }
             }
             
             #endregion
@@ -50,6 +65,9 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
                     deliveryRequest.Status = "pickedup";
                     _unitOfWork.RequestForDelivery.Update(deliveryRequest);
                     await _unitOfWork.SaveChangesAsync();
+
+                    // This to change Order status on OrderService.
+                     _unitOfWork.ChangeOrderStatus(deliveryRequest.OrderId, deliveryRequest.Status);
 
                     return NoContent();
                 }

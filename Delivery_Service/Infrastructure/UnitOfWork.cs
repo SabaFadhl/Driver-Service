@@ -43,11 +43,11 @@ namespace DeliveryService.Infrastructure
             }
         }
 
-        public async void AssignDriverForOrder(string PickupOrderId)
+        public async void AssignOrderToDriver(string PickupOrderId)
         {
             // Here, one of the algorithms can be used to choose the appropriate driver according to the criteria.
-            // By default, Now we can choice the available online and not busy Driver.
-            // This code for one order for driver.
+            // By default, Now we can choice the available online Driver with IsBusy status = false.
+            // This code to Assign an Order To one Driver.
 
             DeliveryRequest requestForDelivery = await RequestForDelivery.GetById(PickupOrderId);
             if (requestForDelivery != null)
@@ -73,6 +73,11 @@ namespace DeliveryService.Infrastructure
                     }                 
                 }
             }
+        }
+
+        public async void ChangeOrderStatus(string orderId, string status)
+        {
+            // Here, We can chanve the status of the order on the OrderService using API end point
         }
     }
 }
