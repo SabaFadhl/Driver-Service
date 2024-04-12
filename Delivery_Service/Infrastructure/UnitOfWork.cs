@@ -18,7 +18,7 @@ namespace DeliveryService.Infrastructure
 
             Driver = new Repository<Driver>(_context);
             RequestForDelivery = new Repository<RequestForDelivery>(_context);
-        }  
+        }
 
         public async Task SaveChangesAsync()
         {
@@ -40,6 +40,38 @@ namespace DeliveryService.Infrastructure
                     _context.Dispose();
                 }
                 _disposed = true;
+            }
+        }
+
+        public async void AssignDriverForOrder(string PickupOrderId)
+        {
+            // Here, one of the algorithms can be used to choose the appropriate driver according to the criteria.
+            // By default, Now we can choice the available online and not busy Driver.
+            // This code for one order for driver.
+
+            RequestForDelivery requestForDelivery = await RequestForDelivery.GetById(PickupOrderId);
+            if (requestForDelivery != null)
+            {
+                Driver driver = await Driver.SingleOrDefaultAsync(x => x.IsBusy == false && x.AvailabilityStatus == "online");
+                if (driver != null)
+                {
+                    try
+                    {
+                        _context.Database.BeginTransaction();
+                        driver.IsBusy = true;
+                        Driver.Update(driver);
+                        await Driver.SaveChanges();
+
+                        requestForDelivery.DriverId = driver.Id;
+                        RequestForDelivery.Update(requestForDelivery);
+                        await RequestForDelivery.SaveChanges();
+                        _context.Database.CommitTransaction();
+                    }
+                    catch  
+                    {
+                        _context.Database.RollbackTransaction();
+                    }                 
+                }
             }
         }
     }

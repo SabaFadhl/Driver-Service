@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Delivery_Service.Migrations
 {
     [DbContext(typeof(MasterContext))]
-    [Migration("20240409140958_InitialCreate")]
+    [Migration("20240412142123_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -23,16 +23,13 @@ namespace Delivery_Service.Migrations
                 .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Delivery_Service.Domain.Driver", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(60)
-                        .HasColumnType("character varying(60)")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                        .HasColumnType("character varying(60)");
 
                     b.Property<string>("AvailabilityStatus")
                         .IsRequired()
@@ -80,10 +77,8 @@ namespace Delivery_Service.Migrations
             modelBuilder.Entity("Delivery_Service.Domain.RequestForDelivery", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(60)
-                        .HasColumnType("character varying(60)")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                        .HasColumnType("character varying(60)");
 
                     b.Property<string>("CompoundName")
                         .IsRequired()
@@ -97,6 +92,10 @@ namespace Delivery_Service.Migrations
 
                     b.Property<DateTime>("DeliveredTime")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DriverId")
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
 
                     b.Property<DateTime>("OnwayTime")
                         .HasColumnType("timestamp without time zone");

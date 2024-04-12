@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Delivery_Service.Domain
 {
@@ -31,6 +32,9 @@ namespace Delivery_Service.Domain
         [Required]
         [MaxLength(250, ErrorMessage = "This field must be less than or equals 250 character")]
         public string CompoundName { get => _compoundName; set => _compoundName = value; }
+        
+        [MaxLength(60, ErrorMessage = "This field must be less than or equals 60 character")]
+        public string DriverId { get => _driverId; set => _driverId = value; }
 
         [Required]
         [MaxLength(10, ErrorMessage = "This field must be less than or equals 10 character")]
@@ -42,5 +46,6 @@ namespace Delivery_Service.Domain
         public DateTime OnwayTime { get => _onwayTime; set => _onwayTime = value; }
 
         public DateTime DeliveredTime { get => _deliveredTime; set => _deliveredTime = value; }
+       
     }
 }

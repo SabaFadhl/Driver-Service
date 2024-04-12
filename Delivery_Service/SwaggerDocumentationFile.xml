@@ -9,6 +9,22 @@
             The Status should be: 'offline' or 'online'
             </summary>
         </member>
+        <member name="P:Delivery_Service.Application.Dto.RequestForDelivery.AddPickupOrderDto.OrderId">
+            <summary>
+            The OrderId is the identity of an order that created in OrderService
+            </summary>
+        </member>
+        <member name="P:Delivery_Service.Application.Dto.RequestForDelivery.AddPickupOrderDto.OrderCode">
+            <summary>
+            The OrderCode is the Numer or Code of an order that created in OrderService.
+            </summary>
+        </member>
+        <member name="P:Delivery_Service.Application.Dto.RequestForDelivery.AddPickupOrderDto.CompoundName">
+            <summary>
+            The CompoundName field represents Name or Short description to read it by Driver when view an orders on the list.
+            This field may be restaurant name and some details
+            </summary>
+        </member>
         <member name="M:Delivery_Service.Controllers.DriverController.DeleteDriverController.Delete(System.String)">
             <summary>
             This API to allow system admin or driver to delete the driver user.
@@ -37,6 +53,13 @@
             </summary>
             <param name="driverId">Driver identity</param>
             <param name="updateDriverDto">Driver information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Delivery_Service.Controllers.RequestForDeliveryController.AddPickupOrderController.Add(Delivery_Service.Application.Dto.RequestForDelivery.AddPickupOrderDto)">
+            <summary>
+            To allow RestaurantService to send the new orders in order to deliver.
+            </summary>
+            <param name="addDeliveryDto">Driver Information.</param>
             <returns></returns>
         </member>
         <member name="T:Delivery_Service.Migrations.InitialCreate">

@@ -14,17 +14,16 @@ namespace DeliveryService.Infrastructure
         public virtual DbSet<Driver> Driver { get; set; }
         public virtual DbSet<RequestForDelivery> RequestForDelivery { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.HasPostgresExtension("uuid-ossp");
+            //modelBuilder.HasPostgresExtension("uuid-ossp");
 
             modelBuilder.Entity<Driver>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasDefaultValueSql("uuid_generate_v4()");
+                //entity.Property(e => e.Id)
+                //    .HasDefaultValueSql("uuid_generate_v4()");
 
                 entity.Property(e => e.AvailabilityStatus)
                   .HasDefaultValueSql("'offline'");
@@ -39,8 +38,8 @@ namespace DeliveryService.Infrastructure
 
             modelBuilder.Entity<RequestForDelivery>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasDefaultValueSql("uuid_generate_v4()");
+                //entity.Property(e => e.Id)
+                //    .HasDefaultValueSql("uuid_generate_v4()");
 
                 entity.Property(e => e.CreateTime)
                    .HasColumnType("timestamp without time zone")
@@ -54,6 +53,9 @@ namespace DeliveryService.Infrastructure
 
                 entity.Property(e => e.DeliveredTime)
                 .HasColumnType("timestamp without time zone");
+
+                entity.Property(e => e.DriverId)
+                        .IsRequired(false);
             });
         }
     }

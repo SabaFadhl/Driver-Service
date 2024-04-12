@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace DeliveryServiceTest.Controllers.DriverController
 {
-    public class DeleteDriverControllerTest
+    public class DeleteDriverControllerTests
     {
         private readonly IFixture _fixture;
         private readonly Mock<IUnitOfWork> _serviceMock;
         private readonly DeleteDriverController _controller;
 
-        public DeleteDriverControllerTest()
+        public DeleteDriverControllerTests()
         {
             _fixture = new Fixture();
             _serviceMock = _fixture.Freeze<Mock<IUnitOfWork>>();

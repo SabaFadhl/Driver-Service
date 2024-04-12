@@ -7,5 +7,7 @@ namespace DeliveryService.Application.Interface
         IRepository<Driver> Driver { get; }
         IRepository<RequestForDelivery> RequestForDelivery { get; }
         Task SaveChangesAsync();
+
+        void AssignDriverForOrder(string PickupOrderId);
     }
 }
