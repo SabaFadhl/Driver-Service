@@ -1,6 +1,7 @@
 using DeliveryService.Application.Interface;
 using DeliveryService.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Delivery Service API (Group4-C)", Version = "v1.1" });
+    var filePath = Path.Combine(System.AppContext.BaseDirectory, "SwaggerDocumentationFile.xml");
+    c.IncludeXmlComments(filePath);
+});
 
 builder.Services.AddDbContext<MasterContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("pglConnectionString") ??
