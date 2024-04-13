@@ -1,4 +1,5 @@
-﻿using Delivery_Service.Domain;
+﻿using Delivery_Service.Application.Dto.DeliveryRequest;
+using Delivery_Service.Domain;
 
 namespace DeliveryService.Application.Interface
 {
@@ -10,6 +11,7 @@ namespace DeliveryService.Application.Interface
 
         void AssignOrderToDriver(string PickupOrderId);
         
-        void ChangeOrderStatus(string orderId, string status);
+        void ChangeOrderStatusAsync(string orderId, string status);
+        Task<ViewOrderDetailsByOrderIdDto> GetOrderDetailsAsync(string orderId);
     }
 }

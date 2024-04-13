@@ -67,7 +67,7 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
                     await _unitOfWork.SaveChangesAsync();
 
                     // This to change Order status on OrderService.
-                     _unitOfWork.ChangeOrderStatus(deliveryRequest.OrderId, deliveryRequest.Status);
+                     _unitOfWork.ChangeOrderStatusAsync(deliveryRequest.OrderId, deliveryRequest.Status);
 
                     return NoContent();
                 }
