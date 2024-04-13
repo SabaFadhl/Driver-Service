@@ -1,4 +1,4 @@
-﻿namespace DeliveryService.Application.Dto
+﻿namespace Delivery_Service.Application.Dto.Common
 {
     public class ReturnGuidDto
     {

@@ -98,17 +98,30 @@ namespace DeliveryService.Infrastructure
         {
             return _context.Set<TEntity>().GroupBy(groupByExpression);
         }
-        public bool SaveChanges()
+         Task<bool> IRepository<TEntity>.SaveChanges()
         {
             if (_context.SaveChanges() > 0)
             {
-                return true;
+                return Task.FromResult<bool>(true);
             }
             else
             {
-                return false;
+                return Task.FromResult<bool>(false);
             }
-        }
+        } 
+        
+        //public bool SaveChanges()
+        //{
+        //    if (_context.SaveChanges() > 0)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+
         public IEnumerable<TEntity> ExecuteSqlQuery(string sql, params object[] parameters)
         {
             return _context.Set<TEntity>().FromSqlRaw(sql, parameters).ToList();
@@ -142,6 +155,6 @@ namespace DeliveryService.Infrastructure
         public async Task<bool> AnyAsync()
         {
            return await _context.Set<TEntity>().AnyAsync();
-        }
+        }         
     }
 }

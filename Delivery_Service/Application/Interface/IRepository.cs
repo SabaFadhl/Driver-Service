@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Delivery_Service.Domain;
+using System.Linq.Expressions;
 
 namespace DeliveryService.Application.Interface
 {
@@ -25,7 +26,7 @@ namespace DeliveryService.Application.Interface
         IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes);
         IQueryable<TEntity> OrderBy(Expression<Func<TEntity, object>> orderByExpression);
         IEnumerable<IGrouping<TKey, TEntity>> GroupBy<TKey>(Expression<Func<TEntity, TKey>> groupByExpression);
-        bool SaveChanges();
+        Task<bool> SaveChanges();
         IEnumerable<TEntity> ExecuteSqlQuery(string sql, params object[] parameters);
         void AddRange(IEnumerable<TEntity> entities);
         void RemoveRange(IEnumerable<TEntity> entities);
@@ -34,5 +35,6 @@ namespace DeliveryService.Application.Interface
         void Dispose();
        
         Task<List<TEntity>> GetAllPageing(int pageIndex, int pageSize);
+       
     }
 }
