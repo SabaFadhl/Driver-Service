@@ -23,7 +23,12 @@ throw new InvalidOperationException("Connections string: pglConnectionString was
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
-
+//Seed Date
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    SeedData.Initialize(services);
+}
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
