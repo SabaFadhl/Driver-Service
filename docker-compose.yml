@@ -1,8 +1,37 @@
 version: '3.4'
 
 services:
+
   delivery_service:
-    image: ${DOCKER_REGISTRY-}deliveryservice
-    build:
-      context: .
-      dockerfile: Delivery_Service/Dockerfile
+      container_name: delivery_service
+      image: ${DOCKER_REGISTRY-}deliveryservice
+      build:
+          context: .
+          dockerfile: Delivery_Service/Dockerfile
+      ports:
+        - 9091:8080
+      environment:
+        - ConnectionStrings__pglConnectionString=Host=database;Port=5432;Database=deliveryservice;Username=postgres;Password=postgres;Include Error Detail=true;  # Pass connection string as environment variable
+      depends_on:
+        - database
+      networks:
+        - delivery
+  
+  database:
+    container_name: database
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - delivery
+
+networks:
+  delivery:
+
+volumes:
+  pgdata: {}
