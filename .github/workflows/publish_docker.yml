@@ -26,3 +26,4 @@ jobs:
         file: ./Delivery_Service/Dockerfile
         push: true
         tags: sabafadhl/deliveryservice:test
+
