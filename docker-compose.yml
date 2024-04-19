@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  delivery_service:
+    image: ${DOCKER_REGISTRY-}deliveryservice
+    build:
+      context: .
+      dockerfile: Delivery_Service/Dockerfile
