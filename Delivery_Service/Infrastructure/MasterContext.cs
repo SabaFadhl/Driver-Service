@@ -57,6 +57,8 @@ namespace DeliveryService.Infrastructure
                 entity.Property(e => e.DriverId)
                         .IsRequired(false);
             });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
