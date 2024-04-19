@@ -1,10 +1,8 @@
 name: Docker Publish
 
 on:
-  push:
-    branches: [ feat/actions ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, feat/actions  ]
 
 jobs:
   docker:
