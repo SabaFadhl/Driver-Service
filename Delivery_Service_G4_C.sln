@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delivery_Service", "Delivery_Service\Delivery_Service.csproj", "{82DFF65F-8699-45DC-83D9-DABA263BDDD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryServiceTest", "DeliveryServiceTest\DeliveryServiceTest.csproj", "{337DD24C-A149-46D4-B239-B157D76D9EAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryServiceTest", "DeliveryServiceTest\DeliveryServiceTest.csproj", "{337DD24C-A149-46D4-B239-B157D76D9EAC}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{75C4068C-2274-4275-B213-13F1D2D12F38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{337DD24C-A149-46D4-B239-B157D76D9EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{337DD24C-A149-46D4-B239-B157D76D9EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{337DD24C-A149-46D4-B239-B157D76D9EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75C4068C-2274-4275-B213-13F1D2D12F38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75C4068C-2274-4275-B213-13F1D2D12F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75C4068C-2274-4275-B213-13F1D2D12F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75C4068C-2274-4275-B213-13F1D2D12F38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
