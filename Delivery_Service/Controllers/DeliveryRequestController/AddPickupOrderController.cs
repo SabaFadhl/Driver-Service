@@ -29,7 +29,6 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
         [HttpPost]
         public async Task<IActionResult> Add(AddPickupOrderDto addPickupOrderDto)
         {
-
             #region Validation Fields            
             if (addPickupOrderDto == null)
             {
@@ -51,6 +50,7 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
 
             try
             {
+
                 DeliveryRequest requestForDelivery = new DeliveryRequest
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -63,9 +63,11 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
 
                 await _unitOfWork.SaveChangesAsync();
 
-                _unitOfWork.AssignOrderToDriver(requestForDelivery.Id);
+                _unitOfWork.AssignOrderToDriver(requestForDelivery.Id);              
 
                 return StatusCode(201, new ReturnGuidDto { Id = requestForDelivery.Id });
+
+                //_unitOfWork.Dispose();
             }
             catch (Exception ex)
             {

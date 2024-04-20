@@ -150,7 +150,7 @@ public class SeedData
                         OrderId = "2",
                         OrderCode = "ORD002",
                         CompoundName = "Restaurant B",
-                        Status = "onway",
+                        Status = "OnTheWay",
                         CreateTime = DateTime.Now,
                         OnwayTime = hour,
                         DeliveredTime = hour
@@ -160,7 +160,7 @@ public class SeedData
                         OrderId = "3",
                         OrderCode = "ORD003",
                         CompoundName = "Restaurant C",
-                        Status = "delivered",
+                        Status = "Delivered",
                         CreateTime = DateTime.Now,
                         OnwayTime = halfOfhour,
                         DeliveredTime = hour
@@ -190,7 +190,7 @@ public class SeedData
                         OrderId = "6",
                         OrderCode = "ORD006",
                         CompoundName = "Restaurant F",
-                        Status = "onway",
+                        Status = "OnTheWay",
                         CreateTime = DateTime.Now,
                         OnwayTime = hour,
                         DeliveredTime = hour
@@ -210,7 +210,7 @@ public class SeedData
                         OrderId = "8",
                         OrderCode = "ORD008",
                         CompoundName = "Restaurant H",
-                        Status = "delivered",
+                        Status = "Delivered",
                         CreateTime = DateTime.Now,
                         OnwayTime = halfOfhour,
                         DeliveredTime = hour
@@ -230,7 +230,7 @@ public class SeedData
                         OrderId = "10",
                         OrderCode = "ORD010",
                         CompoundName = "Restaurant J",
-                        Status = "onway",
+                        Status = "OnTheWay",
                         CreateTime = DateTime.Now,
                         OnwayTime = halfOfhour,
                         DeliveredTime = hour

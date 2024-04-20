@@ -11,7 +11,7 @@ namespace DeliveryService.Application.Interface
 
         void AssignOrderToDriver(string PickupOrderId);
         
-        void ChangeOrderStatusAsync(string orderId, string status);
+        void ChangeOrderStatusAsync(string deliveryRequestId, string orderId, string status, string deliveryPhoneNumber);
         Task<ViewOrderDetailsByOrderIdDto> GetOrderDetailsAsync(string orderId);
     }
 }

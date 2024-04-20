@@ -54,19 +54,19 @@ namespace DeliveryService.Infrastructure
         public async void AssignOrderToDriver(string PickupOrderId)
         {
             // Here, one of the algorithms can be used to choose the appropriate driver according to the criteria.
-            // By default, Now we can choice the available online Driver with IsBusy status = false.
+            // By default, Now we can choice an available online Driver with IsBusy status = false.
             // This code to Assign an Order To one Driver.
 
             DeliveryRequest requestForDelivery = await RequestForDelivery.GetById(PickupOrderId);
             if (requestForDelivery != null)
             {
-                Driver driver = await Driver.SingleOrDefaultAsync(x => x.IsBusy == false && x.AvailabilityStatus == "online");
+                Driver driver = await Driver.FirstOrDefaultAsync(x => x.IsBusy == false && x.AvailabilityStatus == "online");
                 if (driver != null)
                 {
                     try
                     {
                         _context.Database.BeginTransaction();
-                        driver.IsBusy = true;
+                        driver.IsBusy = true; 
                         Driver.Update(driver);
                         await Driver.SaveChanges();
 
@@ -83,11 +83,33 @@ namespace DeliveryService.Infrastructure
             }
         }
 
-        public async void ChangeOrderStatusAsync(string orderId, string status)
+        public async void ChangeOrderStatusAsync(string deliveryRequestId, string orderId, string status,string deliveryPhoneNumber)
         {
             // Here, We can change the status of the order on the OrderService using API end point
 
-            // status = pickedup/onway/delivered
+            // status = pickedup/onway/delivered           
+
+            var data = new { status = (status== status), deliveryId = deliveryRequestId, deliveryNumber = deliveryPhoneNumber, note = "" };
+
+            HttpClient client = new HttpClient();
+
+            client.BaseAddress = new Uri(MemberVariables.BASE_URL_ORDER_SERVICE);
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(MemberVariables.ENDPOINT_ORDER_SERVICE__UPDATE_ORDER_STATUS
+                .Replace("{deliveryId}", deliveryRequestId)
+                .Replace("{orderId}", orderId), data);
+
+           // response.EnsureSuccessStatusCode();
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+               
+            }
+            else
+            {
+               
+            }
         }
 
         public async Task<ViewOrderDetailsByOrderIdDto> GetOrderDetailsAsync(string orderId)

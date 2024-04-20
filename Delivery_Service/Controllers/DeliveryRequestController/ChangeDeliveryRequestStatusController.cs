@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace Delivery_Service.Controllers.DeliveryRequestController
 {
-    [Route("api/AcceptDeliveryRequest")]
+    [Route("api/ChangeDeliveryRequestStatus")]
     [ApiController]
     public class ChangeDeliveryRequestStatusController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
         {
             _unitOfWork = unitOfWork;
         }
-        
+
         /// <summary>
         /// This API to allow Driver to accept(Picked Up) DeliveryRequest.
         /// </summary>
@@ -45,29 +45,33 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
             }
             else
             {
-                string pattern = @"(pickedup|onway|delivered)";
+                // string pattern = @"(pickedup|onway|delivered)";
+                string pattern = @"(OnTheWay|Delivered)";
                 Match match = Regex.Match(changeOrderStatusDto.Status, pattern, RegexOptions.IgnoreCase);
 
                 if (!match.Success)
                 {
-                    return BadRequest(new { errorMessage = "The status must be one of (pickedup, onway, delivered)." });
+                    return BadRequest(new { errorMessage = "The status must be one of (OnTheWay, Delivered)." });
                 }
             }
-            
+
             #endregion
 
             try
             {
+                Driver driver = await _unitOfWork.Driver.GetById(driverId);
+
                 DeliveryRequest deliveryRequest = await _unitOfWork.RequestForDelivery.SingleOrDefaultAsync(x => x.DriverId == driverId && x.Id == deliveryRequestId);
 
                 if (deliveryRequest != null)
                 {
-                    deliveryRequest.Status = "pickedup";
+                    deliveryRequest.Status = "OnTheWay";
                     _unitOfWork.RequestForDelivery.Update(deliveryRequest);
                     await _unitOfWork.SaveChangesAsync();
 
                     // This to change Order status on OrderService.
-                     _unitOfWork.ChangeOrderStatusAsync(deliveryRequest.OrderId, deliveryRequest.Status);
+                    _unitOfWork.ChangeOrderStatusAsync(deliveryRequest.Id, deliveryRequest.OrderId, deliveryRequest.Status, driver.PhoneNumber);
+                    // deliveryRequest.
 
                     return NoContent();
                 }

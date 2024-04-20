@@ -71,11 +71,11 @@ namespace DeliveryService.Infrastructure
         }
         public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+            return  _context.Set<TEntity>().FirstOrDefault(predicate);
         }
         public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().SingleOrDefault(predicate);
+            return await _context.Set<TEntity>().SingleOrDefaultAsync(predicate);
         }
 
         public IEnumerable<TEntity> GetPaginated(int page, int pageSize)
