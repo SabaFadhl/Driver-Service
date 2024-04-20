@@ -22,7 +22,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./Delivery_Service
-        file: ./Delivery_Service/Dockerfile
+        file: Delivery_Service/Dockerfile
         push: true
-        tags: sabafadhl/deliveryservice:test
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/deliveryservice:test
 
