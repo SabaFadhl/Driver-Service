@@ -37,7 +37,7 @@
             <param name="addDeliveryDto">Driver Information.</param>
             <returns></returns>
         </member>
-        <member name="M:Delivery_Service.Controllers.DeliveryRequestController.ChangeDeliveryRequestStatusController.ChangeDeliveryRequestStatus(System.String,System.String,Delivery_Service.Application.Dto.DeliveryRequest.ChangeOrderStatusDto)">
+        <member name="M:Delivery_Service.Controllers.DeliveryRequestController.ChangeDeliveryRequestStatusController.ChangeDeliveryRequestStatus(System.String,Delivery_Service.Application.Dto.DeliveryRequest.ChangeOrderStatusDto)">
             <summary>
             This API to allow Driver to accept(Picked Up) DeliveryRequest.
             </summary>
@@ -72,6 +72,13 @@
             </summary>
             <param name="pageIndex"></param>
             <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Delivery_Service.Controllers.DriverController.GetDriverOrdersListController.GetList(System.String)">
+            <summary>
+            This API Allowing the driver to view the current orders he has.
+            </summary>
+            <param name="driverId"></param>         
             <returns></returns>
         </member>
         <member name="M:Delivery_Service.Controllers.DriverController.UpdateDriverController.Update(System.String,Delivery_Service.Application.Dto.Driver.UpdateDriverDto)">
