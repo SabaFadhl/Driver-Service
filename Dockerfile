@@ -4,7 +4,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 # Set the build configuration
 ENV BUILD_CONFIGURATION=Release
 
@@ -14,12 +13,11 @@ WORKDIR /src
 COPY ["Delivery_Service/Delivery_Service.csproj", "Delivery_Service/"]
 RUN dotnet restore "./Delivery_Service/./Delivery_Service.csproj"
 COPY . .
-WORKDIR "/src/Delivery_Service"
-RUN dotnet build "./Delivery_Service.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./Delivery_Service/Delivery_Service.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Delivery_Service.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Delivery_Service/Delivery_Service.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

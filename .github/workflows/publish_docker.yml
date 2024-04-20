@@ -26,7 +26,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./Delivery_Service
-          file: ./Delivery_Service/Dockerfile
+          context: .
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/deliveryservice:test  # Please change the username here

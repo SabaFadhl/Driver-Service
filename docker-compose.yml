@@ -7,7 +7,7 @@ services:
       image: ${DOCKER_REGISTRY-}deliveryservice
       build:
           context: .
-          dockerfile: Delivery_Service/Dockerfile
+          dockerfile: ./Dockerfile
       ports:
         - 9091:8080
       environment:
