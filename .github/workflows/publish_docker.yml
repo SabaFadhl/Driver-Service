@@ -28,4 +28,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/deliveryservice:test  # Please change the username here
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/deliveryservice:letest
