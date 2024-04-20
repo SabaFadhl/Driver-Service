@@ -1,0 +1,15 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: deliveryservice-service
+  namespace: deliveryservice
+  labels:
+    app: delivery-app
+spec: 
+  selector: 
+    app: delivery-app 
+  type: LoadBalancer
+  ports:
+    - protocol: TCP 
+      port: 9091 
+      targetPort: 8080 
