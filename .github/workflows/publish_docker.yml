@@ -20,11 +20,11 @@ jobs:
       - name: DockerHub login
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/deliveryservice:latest  # Please change the username here
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/deliveryservice:test  # Please change the username here
