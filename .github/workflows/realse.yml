@@ -29,16 +29,16 @@ jobs:
         dotnet-version: 5.0.x
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Delivery_Service/Delivery_Service.csproj
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build Delivery_Service/Delivery_Service.csproj --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test Delivery_Service/Delivery_Service.csproj --no-restore --verbosity normal
 
     - name: Publish
-      run: dotnet publish --configuration Release --no-build --output ./publish
+      run: dotnet publish Delivery_Service/Delivery_Service.csproj --configuration Release --no-build --output ./publish
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2

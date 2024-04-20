@@ -13,11 +13,12 @@ WORKDIR /src
 COPY ["Delivery_Service/Delivery_Service.csproj", "Delivery_Service/"]
 RUN dotnet restore "./Delivery_Service/./Delivery_Service.csproj"
 COPY . .
-RUN dotnet build "./Delivery_Service/Delivery_Service.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Delivery_Service"
+RUN dotnet build "./Delivery_Service.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Delivery_Service/Delivery_Service.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Delivery_Service.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
