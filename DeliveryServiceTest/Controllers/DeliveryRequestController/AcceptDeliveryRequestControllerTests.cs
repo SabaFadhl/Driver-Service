@@ -27,6 +27,9 @@ namespace DeliveryServiceTest.Controllers.DeliveryRequestController
             _controller = new ChangeDeliveryRequestStatusController(_serviceMock.Object);
         }
 
+        /// <summary>
+        /// Integration Test With Order Service
+        /// </summary>
         [Fact]
         public void ChangeDeliveryRequestStatus_to_delivered_Should_Return_NoContent()
         {
@@ -34,9 +37,14 @@ namespace DeliveryServiceTest.Controllers.DeliveryRequestController
             string driverId = Guid.NewGuid().ToString();
             string deliveryRequestId = Guid.NewGuid().ToString();
             Delivery_Service.Domain.DeliveryRequest request = _fixture.Create<Delivery_Service.Domain.DeliveryRequest>();
+
+            Driver requestDriver = _fixture.Create<Driver>();
+            requestDriver.Id = driverId;
+            _serviceMock.Setup(x => x.Driver.GetById(requestDriver.Id)).ReturnsAsync(requestDriver);
+
             _serviceMock.Setup(x => x.RequestForDelivery.SingleOrDefaultAsync(x => x.DriverId == driverId && x.Id == deliveryRequestId)).ReturnsAsync(request);
             ChangeOrderStatusDto statusDto = new();
-            statusDto.Status = "delivered";
+            statusDto.Status = "Delivered";
 
             // Act
             var result = _controller.ChangeDeliveryRequestStatus(driverId, deliveryRequestId, statusDto);
