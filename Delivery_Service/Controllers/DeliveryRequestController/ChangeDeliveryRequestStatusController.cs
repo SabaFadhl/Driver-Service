@@ -27,14 +27,14 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
         /// <param name="deliveryRequestId">DeliveryRequestId</param>
         /// <returns></returns>
 
-        [HttpPut("{driverId}/{deliveryRequestId}")]
-        public async Task<IActionResult> ChangeDeliveryRequestStatus(string driverId, string deliveryRequestId, [FromBody] ChangeOrderStatusDto changeOrderStatusDto)
+        [HttpPut("{deliveryRequestId}")]
+        public async Task<IActionResult> ChangeDeliveryRequestStatus(string deliveryRequestId, [FromBody] ChangeOrderStatusDto changeOrderStatusDto)
         {
             #region Validation Fields
-            if (string.IsNullOrWhiteSpace(driverId))
-            {
-                return BadRequest(new { errorMessage = "The driverId is null." });
-            }
+            //if (string.IsNullOrWhiteSpace(driverId))
+            //{
+            //    return BadRequest(new { errorMessage = "The driverId is null." });
+            //}
             if (string.IsNullOrWhiteSpace(deliveryRequestId))
             {
                 return BadRequest(new { errorMessage = "The deliveryRequestId is null." });
@@ -58,7 +58,7 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
 
             try
             {
-                DeliveryRequest deliveryRequest = await _unitOfWork.RequestForDelivery.SingleOrDefaultAsync(x => x.DriverId == driverId && x.Id == deliveryRequestId);
+                DeliveryRequest deliveryRequest = await _unitOfWork.RequestForDelivery.SingleOrDefaultAsync(x => x.Id == deliveryRequestId);
 
                 if (deliveryRequest != null)
                 {
@@ -73,7 +73,7 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
                 }
                 else
                 {
-                    return NotFound(new { ErrorMessag = "There is no DeliveryRequest with DriverId '" + driverId + "' And DeliveryRequestId '" + deliveryRequestId + "'" });
+                    return NotFound(new { ErrorMessag = "There is no DeliveryRequest with DeliveryRequestId '" + deliveryRequestId + "'" });
                 }
             }
             catch (Exception ex)

@@ -60,13 +60,13 @@ namespace DeliveryService.Infrastructure
             DeliveryRequest requestForDelivery = await RequestForDelivery.GetById(PickupOrderId);
             if (requestForDelivery != null)
             {
-                Driver driver = await Driver.SingleOrDefaultAsync(x => x.IsBusy == false && x.AvailabilityStatus == "online");
+                Driver driver = await Driver.FirstOrDefaultAsync(x => x.IsBusy == false && x.AvailabilityStatus == "online");
                 if (driver != null)
                 {
                     try
                     {
                         _context.Database.BeginTransaction();
-                        driver.IsBusy = true;
+                        //driver.IsBusy = true;
                         Driver.Update(driver);
                         await Driver.SaveChanges();
 
@@ -120,6 +120,25 @@ namespace DeliveryService.Infrastructure
             }
 
             return mockData;
+        }
+
+        public async Task<List<ViewDriverOrderDto>> GetDriverOrdersListAsync(string driverId)
+        {
+
+            List<ViewDriverOrderDto> driverOrderDtos = new();
+
+            List<DeliveryRequest> viewDriverOrderDtos = await RequestForDelivery.FindAsync(x => x.DriverId == driverId);
+            foreach (var item in viewDriverOrderDtos)
+            {
+                ViewDriverOrderDto viewDriverOrder = new ViewDriverOrderDto();
+                viewDriverOrder.OrderId = item.OrderId;
+                viewDriverOrder.OrderCode = item.OrderCode;
+                viewDriverOrder.OrderStatus = item.Status;
+
+                driverOrderDtos.Add(viewDriverOrder);
+            }
+
+            return driverOrderDtos;
         }
     }
 }

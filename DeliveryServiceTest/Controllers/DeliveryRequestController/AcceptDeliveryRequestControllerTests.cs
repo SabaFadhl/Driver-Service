@@ -53,12 +53,12 @@ namespace DeliveryServiceTest.Controllers.DeliveryRequestController
             string driverId = Guid.NewGuid().ToString();
             string deliveryRequestId = Guid.NewGuid().ToString();
             Delivery_Service.Domain.DeliveryRequest request = _fixture.Create<Delivery_Service.Domain.DeliveryRequest>();
-            _serviceMock.Setup(x => x.RequestForDelivery.SingleOrDefaultAsync(x => x.DriverId == driverId && x.Id == deliveryRequestId)).ReturnsAsync(request);
+            _serviceMock.Setup(x => x.RequestForDelivery.SingleOrDefaultAsync(x =>  x.Id == deliveryRequestId)).ReturnsAsync(request);
             ChangeOrderStatusDto statusDto = new();
             statusDto.Status = "any word as status";
 
             // Act
-            var result = _controller.ChangeDeliveryRequestStatus(driverId, deliveryRequestId, statusDto);
+            var result = _controller.ChangeDeliveryRequestStatus(deliveryRequestId, statusDto);
 
             // Assert            
             var objectResult = Assert.IsAssignableFrom<BadRequestObjectResult>(result.Result);
