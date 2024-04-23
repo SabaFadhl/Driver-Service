@@ -1,12 +1,14 @@
+using Delivery_Service;
 using DeliveryService.Application.Interface;
 using DeliveryService.Infrastructure;
+using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-
+Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+Env.Load();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -31,6 +33,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
+
+
 //Seed Date
 using (var scope = app.Services.CreateScope())
 {

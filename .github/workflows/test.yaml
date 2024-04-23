@@ -1,4 +1,4 @@
-name: ASP.NET Core CI
+name: Test
 
 on:
   push:
@@ -29,13 +29,16 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      run: dotnet restore Delivery_Service/Delivery_Service.csproj
+      run: dotnet restore DeliveryServiceTest/DeliveryServiceTest.csproj
 
     - name: Build
-      run: dotnet build Delivery_Service/Delivery_Service.csproj --configuration Release --no-restore
+      run: dotnet build DeliveryServiceTest/DeliveryServiceTest.csproj --configuration Release --no-restore
+
+    - name: Test
+      run: dotnet test DeliveryServiceTest/DeliveryServiceTest.csproj --no-restore --verbosity normal
 
     - name: Publish
-      run: dotnet publish Delivery_Service/Delivery_Service.csproj --configuration Release --no-build --output ./publish
+      run: dotnet publish DeliveryServiceTest/DeliveryServiceTest.csproj --configuration Release --no-build --output ./publish
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2

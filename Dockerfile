@@ -11,7 +11,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Delivery_Service/Delivery_Service.csproj", "Delivery_Service/"]
-RUN dotnet restore "./Delivery_Service/./Delivery_Service.csproj"
+RUN dotnet restore "./Delivery_Service/Delivery_Service.csproj"
 COPY . .
 WORKDIR "/src/Delivery_Service"
 RUN dotnet build "./Delivery_Service.csproj" -c $BUILD_CONFIGURATION -o /app/build
