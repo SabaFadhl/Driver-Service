@@ -98,14 +98,13 @@ namespace DeliveryService.Infrastructure
             #region Mock Data
             IFixture _fixture = new Fixture();
             var mockData = _fixture.Create<ViewOrderDetailsByOrderIdDto>();
-            mockData.CustomerAddressId = "09a74d27-c093-4788-8a03-266a78090a57";
+            mockData.CustomerAddressId = "691729e1-3d23-4af3-bdcc-b75458rrr0";
             #endregion
 
             HttpClient client = new HttpClient();
 
             client.BaseAddress = new Uri(MemberVariables.BASE_URL_CUSTOMER_SERVICE);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
-
             HttpResponseMessage response = await client.GetAsync(MemberVariables.ENDPOINT_CUSTOMER_SERVICE__CUSTOMER_ADDRESS.Replace("#1", mockData.CustomerAddressId));
             response.EnsureSuccessStatusCode();
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
