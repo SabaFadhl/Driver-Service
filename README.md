@@ -1,7 +1,3 @@
-
-**Delivery Service README:**
-
-```markdown
 # Delivery Service
 
 This service is part of an ASP.NET application that works with PostgreSQL. It handles courier/driver account and details management, as well as delivery assignment.
