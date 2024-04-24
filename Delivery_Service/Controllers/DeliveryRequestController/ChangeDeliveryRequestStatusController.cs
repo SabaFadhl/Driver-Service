@@ -69,7 +69,7 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
                     // This to change Order status on OrderService.
                      _unitOfWork.ChangeOrderStatusAsync(deliveryRequest.OrderId, deliveryRequest.Status);
 
-                    return NoContent();
+                    return Ok();
                 }
                 else
                 {

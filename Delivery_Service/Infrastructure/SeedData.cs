@@ -15,7 +15,7 @@ public class SeedData
                 var drivers = new List<Driver>
                 {
                     new Driver {
-                        Id = Guid.NewGuid().ToString(), // Generate a unique Id for each object
+                        Id = "49f7bc4e-8494-4a63-9476-9a2ae469f075", // Generate a unique Id for each object
                         Name = "سائق سعيد",
                         Email = "driver1@example.com",
                         Password = "password1",
@@ -136,7 +136,7 @@ public class SeedData
                 var deliveryRequests = new List<DeliveryRequest>
                 {
                     new DeliveryRequest {
-                        Id = Guid.NewGuid().ToString(), // Generate a unique Id for each object
+                        Id = "49f7bc4e-8494-4a63-9476-9a2ae469f071",
                         OrderId = "1",
                         OrderCode = "ORD001",
                         CompoundName = "Restaurant A",
