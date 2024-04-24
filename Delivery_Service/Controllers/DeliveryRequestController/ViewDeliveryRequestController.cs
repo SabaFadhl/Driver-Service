@@ -57,5 +57,33 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
                 return BadRequest(new { ex.Message });
             }
         }
+        public async Task<IActionResult> GetList([FromQuery] int pageIndex, int pageSize)
+        {
+            try
+            {
+
+                List<DeliveryRequest> requestForDeliveries = await _unitOfWork.RequestForDelivery.GetAllPageing(pageIndex, pageSize);
+
+                List<ViewDeliveryRequestDto> viewDeliveryRequestDtos = new();
+                foreach (DeliveryRequest item in requestForDeliveries)
+                {
+                    viewDeliveryRequestDtos.Add(new ViewDeliveryRequestDto
+                    {
+                        CompoundName = item.CompoundName,
+                        CreateTime = item.CreateTime,
+                        Id = item.Id,
+                        OrderCode = item.OrderCode,
+                        OrderId = item.OrderId,
+                        Status = item.Status
+
+                    });
+                }
+                return Ok(viewDeliveryRequestDtos);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
     }
 }

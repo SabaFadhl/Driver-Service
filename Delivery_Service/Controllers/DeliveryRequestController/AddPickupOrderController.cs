@@ -39,6 +39,10 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
             {
                 return BadRequest(new { errorMessage = "You should be provide an order Identity." });
             }
+            else
+            {
+
+            }
             if (string.IsNullOrWhiteSpace(addPickupOrderDto.OrderCode))
             {
                 return BadRequest(new { errorMessage = "You should be provide an order Code or Number." });
@@ -65,7 +69,7 @@ namespace Delivery_Service.Controllers.DeliveryRequestController
 
                 _unitOfWork.AssignOrderToDriver(requestForDelivery.Id);
 
-                return StatusCode(201, new ReturnGuidDto { Id = requestForDelivery.Id });
+                return StatusCode(201, new  { deliveryRequestId = requestForDelivery.Id, driverId = requestForDelivery.DriverId });
             }
             catch (Exception ex)
             {
